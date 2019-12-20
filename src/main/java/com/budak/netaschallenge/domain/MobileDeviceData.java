@@ -4,6 +4,7 @@ import com.budak.netaschallenge.enums.EnumOperatingSystem;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Samet BUDAK
@@ -19,20 +20,20 @@ public class MobileDeviceData {
     private Long id;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Please enter brand")
     private String brand;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Please enter model")
     private String model;
 
     @Enumerated(EnumType.STRING)
     @Column
-    @NotEmpty
+    @NotNull(message = "please enter os")
     private EnumOperatingSystem os;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Please enter osVersion")
     private String osVersion;
 
     public Long getId() {
