@@ -24,23 +24,23 @@ public class MobileDeviceData {
 
     @Column(name = "BRAND")
     @NotEmpty(message = "Please enter brand")
-    @ApiModelProperty(notes="brand is a mandatory field")
+    @ApiModelProperty(notes="brand is a mandatory field", example = "XIAOMI")
     private String brand;
 
     @Column(name = "MODEL")
     @NotEmpty(message = "Please enter model")
-    @ApiModelProperty(notes="model is a mandatory field")
+    @ApiModelProperty(notes="model is a mandatory field", example = "MI 8 ")
     private String model;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "OS")
     @NotNull(message = "please enter os")
-    @ApiModelProperty(notes="os is Enumerated , it can be either Android or ios")
+    @ApiModelProperty(notes="os is Enumerated , it can be either Android or ios", example = "ios")
     private EnumOperatingSystem os;
 
     @Column(name = "OS_VERSION")
     @NotEmpty(message = "Please enter osVersion")
-    @ApiModelProperty(notes="osVersion must not be empty")
+    @ApiModelProperty(notes="osVersion must not be empty", example = "8.0.1")
     private String osVersion;
 
     public MobileDeviceData(){
