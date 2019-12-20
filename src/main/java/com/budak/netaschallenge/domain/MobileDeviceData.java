@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @since
  */
 @Entity
-@Table(name = "MOBILE_DEVICE_DATA")
+@Table(name = "MOBILE_DEVICE_DATA", uniqueConstraints = @UniqueConstraint(columnNames = {"BRAND", "MODEL", "OS_VERSION"}))
 public class MobileDeviceData {
 
     @GeneratedValue(generator = "modelDeviceData", strategy = GenerationType.AUTO)
@@ -19,22 +19,33 @@ public class MobileDeviceData {
     @SequenceGenerator(name = "modelDeviceData", sequenceName = "MOBILE_DEVICE_DATA_ID_SEQ")
     private Long id;
 
-    @Column
+    @Column(name = "BRAND")
     @NotEmpty(message = "Please enter brand")
     private String brand;
 
-    @Column
+    @Column(name = "MODEL")
     @NotEmpty(message = "Please enter model")
     private String model;
 
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name = "OS")
     @NotNull(message = "please enter os")
     private EnumOperatingSystem os;
 
-    @Column
+    @Column(name = "OS_VERSION")
     @NotEmpty(message = "Please enter osVersion")
     private String osVersion;
+
+    public MobileDeviceData(){
+
+    }
+
+    public MobileDeviceData(@NotEmpty(message = "Please enter brand") String brand, @NotEmpty(message = "Please enter model") String model, @NotNull(message = "please enter os") EnumOperatingSystem os, @NotEmpty(message = "Please enter osVersion") String osVersion) {
+        this.brand = brand;
+        this.model = model;
+        this.os = os;
+        this.osVersion = osVersion;
+    }
 
     public Long getId() {
         return id;
