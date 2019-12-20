@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author Samet BUDAK
  * @since
@@ -18,7 +20,7 @@ public class MobileDeviceDataController {
     MobileDeviceDataService mobileDeviceDataService;
 
     @PostMapping("/saveMobileDeviceData")
-    private Long saveMobileDeviceData(@RequestBody MobileDeviceData mobileDeviceData) {
+    private Long saveMobileDeviceData(@Valid @RequestBody MobileDeviceData mobileDeviceData) {
         MobileDeviceData savedMobileDeviceData = mobileDeviceDataService.saveOrUpdate(mobileDeviceData);
         return savedMobileDeviceData.getId();
     }
