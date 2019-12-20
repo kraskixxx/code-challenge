@@ -1,6 +1,8 @@
 package com.budak.netaschallenge.domain;
 
 import com.budak.netaschallenge.enums.EnumOperatingSystem;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +14,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "MOBILE_DEVICE_DATA", uniqueConstraints = @UniqueConstraint(columnNames = {"BRAND", "MODEL", "OS_VERSION"}))
+@ApiModel(description="All details about the MobileDeviceData. ")
 public class MobileDeviceData {
 
     @GeneratedValue(generator = "modelDeviceData", strategy = GenerationType.AUTO)
@@ -21,19 +24,23 @@ public class MobileDeviceData {
 
     @Column(name = "BRAND")
     @NotEmpty(message = "Please enter brand")
+    @ApiModelProperty(notes="brand is a mandatory field")
     private String brand;
 
     @Column(name = "MODEL")
     @NotEmpty(message = "Please enter model")
+    @ApiModelProperty(notes="model is a mandatory field")
     private String model;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "OS")
     @NotNull(message = "please enter os")
+    @ApiModelProperty(notes="os is Enumerated , it can be either Android or ios")
     private EnumOperatingSystem os;
 
     @Column(name = "OS_VERSION")
     @NotEmpty(message = "Please enter osVersion")
+    @ApiModelProperty(notes="osVersion must not be empty")
     private String osVersion;
 
     public MobileDeviceData(){
