@@ -1,11 +1,9 @@
 package com.budak.netaschallenge.domain;
 
-import org.hibernate.annotations.ColumnDefault;
+import com.budak.netaschallenge.enums.EnumOperatingSystem;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  * @author Samet BUDAK
@@ -28,9 +26,9 @@ public class MobileDeviceData {
     @NotEmpty
     private String model;
 
+    @Enumerated(EnumType.STRING)
     @Column
-    @NotEmpty
-    private String os;
+    private EnumOperatingSystem os;
 
     @Column
     @NotEmpty
