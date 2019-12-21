@@ -13,13 +13,13 @@ import javax.validation.constraints.NotNull;
  * @since
  */
 @Entity
-@Table(name = "MOBILE_DEVICE_DATA", uniqueConstraints = @UniqueConstraint(columnNames = {"BRAND", "MODEL", "OS_VERSION"}))
-@ApiModel(description="All details about the MobileDeviceData. ")
-public class MobileDeviceData {
+@Table(name = "DEVICE", uniqueConstraints = @UniqueConstraint(columnNames = {"BRAND", "MODEL", "OS_VERSION"}))
+@ApiModel(description="All details about the Device. ")
+public class Device {
 
-    @GeneratedValue(generator = "modelDeviceData", strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "device", strategy = GenerationType.AUTO)
     @Id
-    @SequenceGenerator(name = "modelDeviceData", sequenceName = "MOBILE_DEVICE_DATA_ID_SEQ")
+    @SequenceGenerator(name = "device", sequenceName = "DEVICE_ID_SEQ")
     private Long id;
 
     @Column(name = "BRAND")
@@ -43,11 +43,11 @@ public class MobileDeviceData {
     @ApiModelProperty(notes="osVersion must not be empty", example = "8.0.1")
     private String osVersion;
 
-    public MobileDeviceData(){
+    public Device(){
 
     }
 
-    public MobileDeviceData(@NotEmpty(message = "Please enter brand") String brand, @NotEmpty(message = "Please enter model") String model, @NotNull(message = "please enter os") EnumOperatingSystem os, @NotEmpty(message = "Please enter osVersion") String osVersion) {
+    public Device(@NotEmpty(message = "Please enter brand") String brand, @NotEmpty(message = "Please enter model") String model, @NotNull(message = "please enter os") EnumOperatingSystem os, @NotEmpty(message = "Please enter osVersion") String osVersion) {
         this.brand = brand;
         this.model = model;
         this.os = os;
@@ -96,7 +96,7 @@ public class MobileDeviceData {
 
     @Override
     public String toString() {
-        return "MobileDeviceData{" +
+        return "Device{" +
                 "id=" + id +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +

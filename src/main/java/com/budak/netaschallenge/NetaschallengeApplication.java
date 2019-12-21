@@ -1,7 +1,7 @@
 package com.budak.netaschallenge;
 
-import com.budak.netaschallenge.domain.MobileDeviceData;
-import com.budak.netaschallenge.service.MobileDeviceDataService;
+import com.budak.netaschallenge.domain.Device;
+import com.budak.netaschallenge.service.DeviceService;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,9 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.io.IOException;
@@ -33,7 +30,7 @@ public class NetaschallengeApplication {
 	}
 
     @Bean
-    CommandLineRunner runner(MobileDeviceDataService mobileDeviceDataService) {
+    CommandLineRunner runner(DeviceService deviceService) {
         return args -> {
             // read json and write to db
             ObjectMapper mapper = new ObjectMapper();
@@ -63,15 +60,15 @@ public class NetaschallengeApplication {
             });
             mapper.registerModule(module);
 
-            TypeReference<List<MobileDeviceData>> typeReference = new TypeReference<List<MobileDeviceData>>(){};
+            TypeReference<List<Device>> typeReference = new TypeReference<List<Device>>(){};
             InputStream inputStream = TypeReference.class.getResourceAsStream("/devices.json");
             try {
-                List<MobileDeviceData> mobileDeviceDataList = mapper.readValue(inputStream,typeReference);
-                Set<MobileDeviceData> mobileDeviceDataSet = new HashSet<>();
-                mobileDeviceDataSet.addAll(mobileDeviceDataList);
+                List<Device> deviceList = mapper.readValue(inputStream,typeReference);
+                Set<Device> deviceSet = new HashSet<>();
+                deviceSet.addAll(deviceList);
 
-                for (MobileDeviceData mobileDeviceData : mobileDeviceDataSet) {
-                    mobileDeviceDataService.saveOrUpdate(mobileDeviceData);
+                for (Device device : deviceSet) {
+                    deviceService.saveOrUpdate(device);
                 }
                 System.out.println("Mobile Device Datas are Saved!");
             } catch (IOException e){
