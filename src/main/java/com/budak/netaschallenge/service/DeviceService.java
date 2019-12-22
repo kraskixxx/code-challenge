@@ -5,6 +5,7 @@ import com.budak.netaschallenge.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class DeviceService {
         return deviceRepository.save(device);
     }
 
-    public Page<Device> findAll(Specification<Device> mobileDeviceDataSpecification) {
-        return (Page<Device>) deviceRepository.findAll(mobileDeviceDataSpecification);
+    public Page<Device> findAllWithSpecification(Specification<Device> deviceSpecification, Pageable pageable) {
+        return (Page<Device>) deviceRepository.findAll(deviceSpecification, pageable);
     }
 }
