@@ -2,6 +2,7 @@ package com.budak.netaschallenge.controller;
 
 import com.budak.netaschallenge.domain.Device;
 import com.budak.netaschallenge.enums.EnumOperatingSystem;
+import com.budak.netaschallenge.exception.DeviceNotFoundException;
 import com.budak.netaschallenge.service.DeviceService;
 import com.budak.netaschallenge.specs.DeviceSpecification;
 import io.swagger.annotations.ApiOperation;
@@ -49,5 +50,10 @@ public class DeviceController {
         Page<Device> deviceList = deviceService.findAllWithSpecification(deviceSpecification, pageable);
 
         return deviceList;
+    }
+
+    @GetMapping("/device/{id}")
+    public Device getDevice(@PathVariable Long id) throws DeviceNotFoundException {
+        return deviceService.findDeviceById(id).orElseThrow(() -> new DeviceNotFoundException(id));
     }
 }
